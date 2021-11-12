@@ -1,0 +1,71 @@
+<div class="container-fluid bg-cont">
+  <div class="row py-4 mx-lg-5 mx-2">
+
+    <div class="row ms-3" *ngIf="equipo.length == 0">
+      <h4 class="text-white my-3">No tiene ningun heroe en su equipo</h4>
+      <h5 class="text-white">Para buscar y agregar nuevos heroes
+        <a [routerLink]="['/buscar']"> pulse aqui</a>
+      </h5>
+    </div>
+
+    <div class="col-lg-7 p-0 overflow-auto h-card">
+      <div class="row card border-white border-3 rounded mt-1 mb-2 mx-sm-3 bg-card
+      d-flex"
+      *ngFor="let e of equipo">
+        <div class="row g-0">
+          <div class="col-3 col-xs-2 text-center">
+            <img src="{{e.image.url}}" class="img-thumbnail rounded image" alt="">
+            <p class="col fs fw-bold">{{e.name}}</p>
+          </div>
+          <div class="col-9 col-xs-10">
+            <div class="card-body d-flex align-items-center">
+              <div class="row">
+                <p class="col-6 col-md-4 col-lg-6 fs">Combate: {{e.powerstats.combat}}</p>
+                <p class="col-6 col-md-4 col-lg-6 fs">Resistencia: {{e.powerstats.durability}}
+                  <button class="btn btn-danger float-end" (click)="eliminar(e.id)">X</button>
+                </p>
+                <p class="col-6 col-md-4 col-lg-6 fs">Inteligencia: {{e.powerstats.intelligence}}</p>
+                <p class="col-6 col-md-4 col-lg-6 fs">Poder: {{e.powerstats.power}}</p>
+                <p class="col-6 col-md-4 col-lg-6 fs">Velocidad: {{e.powerstats.speed}}</p>
+                <p class="col-6 col-md-4 col-lg-6 fs">Fuerza: {{e.powerstats.strength}}</p>
+                <p class="col-6 col-md-6 col-lg-6 fs">Afiliacion: {{e.biography.alignment}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-5 g-0 d-flex">
+      <div class="row g-0 w-100">
+        <div class="row g-0">
+          <div *ngIf="equipo.length > 0" class="d-flex align-items-center">
+            <div class="col bg-card rounded border border-white border-3 mx-md-5" 
+            *ngFor="let t of total">
+              <div class="row row-cols-2 py-1 g-0">
+                <div class="col py-2 px-4">
+                  <p class="fs m-0 fw-bold">Alineacion: {{valor}}</p>
+                  <p class="fs m-0">Peso general: {{t.peso}}Kg</p>
+                  <p class="fs m-0">Altura general: {{t.altura}}</p>
+                  <p class="fs m-0">Integrantes: {{equipo.length}}/6</p>
+                </div>
+                <div class="col py-2">
+                  <img class="img-fluid imagen rounded" src="../../../assets/img/{{valor}}.png" alt="">
+                </div>
+              </div>
+              <div class="row row-cols-2 g-0 py-2 px-4">
+                <p class="col m-0 fs">Combate: {{t.combate}}</p>
+                <p class="col m-0 fs">Resistencia: {{t.resistencia}}</p>
+                <p class="col m-0 fs">Inteligencia: {{t.inteligencia}}</p>
+                <p class="col m-0 fs">Poder: {{t.poder}}</p>
+                <p class="col m-0 fs">Velocidad: {{t.velocidad}}</p>
+                <p class="col m-0 fs">Fuerza: {{t.fuerza}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

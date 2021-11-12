@@ -1,0 +1,19 @@
+.bg-cont {
+    background-color: #212529;
+}
+p {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 17px;
+}
+h5 {
+    font-family: 'Times New Roman', Times, serif;
+}
+.bg-div {
+ background-color: #00314c;
+}
+.uno {
+    border: crimson solid;
+}
+.dos {
+    border: darkcyan solid;
+}

@@ -1,0 +1,16 @@
+*{
+    font-family: 'Times New Roman', Times, serif;
+}
+.bg-img {
+    background-image: url(https://www.parquedelconocimiento.com/images/2017/11/20171130_imax-1280x720.jpg);
+    background-position: center;
+}
+.bg-form {
+    background-image: linear-gradient(180deg, #a6ffff 0, #a2edff 25%, #9dd5f2 50%, #96bed5 75%, #8ea8b9 100%);
+}
+.fs {
+    font-size: 17px;
+}
+.h-login {
+    height: 100vh;
+}

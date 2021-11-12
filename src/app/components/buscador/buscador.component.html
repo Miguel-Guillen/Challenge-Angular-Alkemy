@@ -1,0 +1,79 @@
+<div class="container-fluid bg-cont">
+  <div class="col pt-2">
+    <div class="row d-flex justify-content-around p-4">
+
+      <div class="col-7 mb-4 g-0 w-table overflow-auto">
+        
+        <div class="px-3" *ngIf="equipo.length == 0 && heroe.length == 0">
+          <h4 class="text-white my-3">No cuenta con ningun heroe en su equipo</h4>
+          <h5 class="text-white">Para añadir un nuevo heroe, escriba en el buscador el 
+            nombre del heroe que desea añadir</h5>
+        </div>
+
+        <h5 class="text-white mb-3 mx-2" *ngIf="heroe.length > 0">
+          Resultados encontrados: {{heroe.length}}
+        </h5>
+
+        <!-- resultados de busqueda -->
+        <div class="row">
+          <div class="col-3 bg-light p-1 border border-3 rounded" *ngFor="let h of heroe">
+            <div class="col py-2 px-3">
+              <img src="{{h.image.url}}" class="img-thumbnail" alt="...">
+            </div>
+            <div class="text-center">
+              <p class="fs fw-bold m-0">{{h.name}}</p>
+              <p class="fs mb-2">Afiliacion: {{h.biography.alignment}}</p>
+              <div class="pt-1">
+                <button class="btn btn-outline-success py-1 me-1" (click)="agregar(h.id)">Añadir</button>
+                <button class="btn btn-outline-success py-1" (click)="detalles(h.id)">
+                  <i class="fas fa-info-circle"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+
+      <div class="col-4 g-0 mb-4 py-1">
+        
+        <!-- buscador -->
+        <div class="row mb-4">
+          <form [formGroup]="busquedaForm" (ngSubmit)="buscar(busquedaForm.value)">
+            <div class="d-flex">
+              <input type="search" class="form-control bg-light d-inline" minlength="3"
+              placeholder="batman" formControlName="nombre" maxlength="30">
+              <button class="btn bg-light border border-1"><i class="fas fa-search"></i></button>
+            </div>
+            <div class="validation-error">
+              <ng-container *ngFor="let validation of validation_messages.nombre">
+                <div *ngIf="!busquedaForm.controls.nombre?.valid && (busquedaForm.controls.nombre?.dirty 
+                || busquedaForm.controls.nombre?.touched)" class="text-danger">
+                  {{validation.message}}
+                </div>
+              </ng-container>
+            </div>
+          </form>
+        </div>
+        
+        <!-- Equipo actual -->
+        <h5 *ngIf="equipo.length != 0" class="text-center text-white">Formacion actual</h5>
+        <div class="row mt-3 g-0" *ngIf="equipo.length != 0">
+          <div class="col-6" *ngFor="let e of equipo">
+            <div class="row card-d border border-2 rounded bg-white d-flex align-items-center">
+              <div class="col-6 p-1">
+                <img src="{{e.image.url}}" class="img-fluid img-thumbnail" alt="">
+              </div>
+              <div class="col-6 text-center px-1 py-2">
+                <p class="fw-bold m-0">{{e.name}}</p>
+                <p>Afiliacion: {{e.biography.alignment}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      
+    </div>
+  </div>
+</div>

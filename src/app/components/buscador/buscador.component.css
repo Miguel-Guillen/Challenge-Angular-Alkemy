@@ -1,0 +1,66 @@
+p{
+    font-family: 'Times New Roman', Times, serif;
+}
+h5 {
+    font-family: 'Times New Roman', Times, serif;
+}
+.bg-card {
+    background-color: #d3d4ff
+}
+.bg-cont {
+    background-color: #212529;
+}
+.fs {
+    font-size: 18px;
+}
+.card-b {
+    height: 180px;
+}
+.card-d {
+    height: 130px;
+}
+.uno {
+    border: crimson solid;
+}
+.dos {
+    border: slateblue solid;
+}
+.w-table {
+    height: 460px;
+}
+
+.w-table::-webkit-scrollbar {
+    -webkit-appearance: none;
+}
+.w-table::-webkit-scrollbar:vertical {
+    width: 10px;
+}
+.w-table::-webkit-scrollbar:horizontal {
+    width: 12px;
+}
+.w-table::-webkit-scrollbar-button:increment,.contenedor::-webkit-scrollbar-button {
+    display: none;
+}
+.w-table::-webkit-scrollbar-track {
+    border-radius: 10px;
+}
+.w-table::-webkit-scrollbar-thumb {
+    background-color: #797979;
+    border-radius: 20px;
+    border: solid #9a9a9b 2px;
+}
+.w-table::-webkit-scrollbar-thumb:hover {
+    background-color: #b3b3b3;
+}
+
+@media (max-width: 768px){
+    .fs {
+        font-size: 17px;
+    }
+}
+
+@media (max-width: 576px){
+    .fs {
+        font-size: 16px;
+    }
+}
