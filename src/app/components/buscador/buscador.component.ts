@@ -33,12 +33,14 @@ export class BuscadorComponent implements OnInit {
 
   ngOnInit(): void {
     this.equipo = JSON.parse(localStorage.getItem('equipo') || '[]');
+    const nombre = 'bat'
+    this.buscar(nombre);
   }
 
   buscar(value: any){
-    this.heroe = [];
-    const name = value.nombre;
-    axios.get(`${this.url}/search/${name}`).then((res: any) => {
+    // this.heroe = [];
+    // const name = value.nombre;
+    axios.get(`${this.url}/search/${value}`).then((res: any) => {
     if(res.data.error) 
     this.toast.error(`No se encontro ningun personaje con el nombre "${name}""`, 'Nombre invalido');
       else {

@@ -1,5 +1,6 @@
-p{
+.fs{
     font-family: 'Times New Roman', Times, serif;
+    font-size: 18px;
 }
 h5 {
     font-family: 'Times New Roman', Times, serif;
@@ -10,14 +11,8 @@ h5 {
 .bg-cont {
     background-color: #212529;
 }
-.fs {
-    font-size: 18px;
-}
 .card-b {
     height: 180px;
-}
-.card-d {
-    height: 130px;
 }
 .uno {
     border: crimson solid;
@@ -53,14 +48,33 @@ h5 {
     background-color: #b3b3b3;
 }
 
-@media (max-width: 768px){
+
+@media (width > 1400px){
     .fs {
-        font-size: 17px;
+        font-size: 20px;
+    }
+    .w-table {
+        height: 700px;
+    }
+}
+
+@media (max-width: 767px){
+    .fs {
+        font-size: 16px;
+    }
+    .w-table {
+        height: 480px;
+    }
+    #equipo {
+        display: none;
     }
 }
 
 @media (max-width: 576px){
     .fs {
-        font-size: 16px;
+        font-size: 13px;
+    }
+    #equipo {
+        display: none;
     }
 }
