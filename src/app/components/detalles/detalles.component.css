@@ -17,3 +17,21 @@ h5 {
 .dos {
     border: darkcyan solid;
 }
+
+@media (max-width: 992px){
+    p {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 769px){
+    p {
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 576px){
+    p {
+        font-size: 14px;
+    }
+}

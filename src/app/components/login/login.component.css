@@ -3,6 +3,7 @@
 }
 .bg-img {
     background-image: url(https://www.parquedelconocimiento.com/images/2017/11/20171130_imax-1280x720.jpg);
+    background-size: cover;
     background-position: center;
 }
 .bg-form {
@@ -13,4 +14,7 @@
 }
 .h-login {
     height: 100vh;
+}
+.invalid {
+    background-color: rgb(228, 161, 161);
 }

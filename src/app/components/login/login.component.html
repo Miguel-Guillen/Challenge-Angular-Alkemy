@@ -1,41 +1,48 @@
 <div class="container-fluid">
     <div class="row">
 
-        <div class="col-7 bg-img"></div>
+        <div class="col-xxl-10 col-xl-8 col-lg-7 col-md-7 bg-img"></div>
 
-        <div class="col-5 h-login d-flex align-items-center bg-form">
-            <div class="row py-3 px-5">
+        <div class="col-xxl-2 col-xl-4 col-lg-5 col-md-5 d-flex align-items-center 
+        justify-content-center bg-form h-login">
+            <div class="row py-3 px-lg-4 px-3">
                 <form [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)">
                     <h4 class="text-center mb-4">Iniciar sesion</h4>
+                    <div class="invalid border border-danger my-3 p-2" *ngIf="loginInvalid === true">
+                        correo o contraseña invalidos
+                    </div>
                     <div class="row row-cols-1">
                         <div class="col my-1 fs">
-                            <label class="form-label">Correo</label>
+                            <label class="form-label">Correo*</label>
                             <input type="email" class="form-control" formControlName="correo"
-                            placeholder="challenge@alkemy.org" required>
+                            placeholder="challenge@alkemy.org" required
+                            [ngClass]="loginInvalid === true ? 'border-danger' : 'border-none' ">
                         </div>
-                        <div class="validation-error">
+                        <div class="text-danger">
                             <ng-container *ngFor="let validation of validation_messages.correo">
                                 <div *ngIf="loginForm.get('correo')?.hasError(validation.type) && 
-                                (loginForm.get('correo')?.dirty || loginForm.get('correo')?.touched)"
-                                class="text-danger">
+                                (loginForm.get('correo')?.dirty || loginForm.get('correo')?.touched)">
                                     {{validation.message}}
                                 </div>
                             </ng-container>
                         </div>
                         <div class="col my-1 fs">
-                            <label class="form-label">Contraseña</label>
-                            <input type="password" class="form-control" formControlName="contrasena">
+                            <label class="form-label">Contraseña*</label>
+                            <input type="password" class="form-control" formControlName="contrasena"
+                            [ngClass]="loginInvalid === true ? 'border-danger' : 'border-none' ">
                         </div>
-                        <div class="validation-error">
+                        <div class="text-danger">
                             <ng-container *ngFor="let validation of validation_messages.contrasena">
                                 <div *ngIf="loginForm.get('contrasena')?.hasError(validation.type) && 
-                                (loginForm.get('contrasena')?.dirty || loginForm.get('contrasena')?.touched)"
-                                class="text-danger">
+                                (loginForm.get('contrasena')?.dirty || loginForm.get('contrasena')?.touched)">
                                     {{validation.message}}
+                                </div>
+                                <div *ngIf="loginForm.get('contrasena')?.hasError('minlength')">
+                                    su contraseña debe ser de 5 caracteres
                                 </div>
                             </ng-container>
                         </div>
-                        <button [disabled]="!loginForm.valid" class="btn btn-primary mt-4 fs">Enviar</button>
+                        <button class="btn btn-primary mt-4 fs">Enviar</button>
                     </div>
                 </form>
             </div>

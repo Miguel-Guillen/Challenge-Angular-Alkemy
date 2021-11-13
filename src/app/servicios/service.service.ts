@@ -12,15 +12,5 @@ export class ServiceService {
   
   constructor(private http: HttpClient) { }
 
-  obtenerSesion(){
-    const sesion = JSON.parse(localStorage.getItem("token") || "");
-    if(sesion !== ""){
-      this.logueado = true;
-    }
-    else {
-      this.logueado = false;
-    };
-    return this.logueado
-  }
 
 }
