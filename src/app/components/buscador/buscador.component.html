@@ -7,8 +7,11 @@
         <div class="row d-flex justify-content-between px-md-2 p-0">
 
           <div class="col mt-2">
-            <p class="text-light fs fw-bold ms-lg-3" *ngIf="heroe.length > 0">
-              Resultados encontrados: {{heroe.length}}
+            <p class="text-light fs fw-bold ms-lg-3" *ngIf="superheroe.length > 0">
+              Resultados encontrados: {{superheroe.length}}
+            </p>
+            <p class="text-light fs ms-lg-3" *ngIf="superheroe.length == 0">
+              Ingrese un nombre o frase en la barra de busqueda, para buscar un superheroe
             </p>
           </div>
 
@@ -16,15 +19,18 @@
             <form [formGroup]="busquedaForm" (ngSubmit)="buscar(busquedaForm.value)">
               <div class="d-flex">
                 <input type="search" class="form-control bg-light d-inline" minlength="3"
-                placeholder="batman" formControlName="nombre" maxlength="30">
+                placeholder="superman" formControlName="nombre" maxlength="30">
                 <button class="btn bg-light border border-1"><i class="fas fa-search"></i></button>
               </div>
-              <div class="validation-error">
+              <div class="text-danger">
                 <ng-container *ngFor="let validation of validation_messages.nombre">
-                  <div *ngIf="!busquedaForm.controls.nombre?.valid && (busquedaForm.controls.nombre?.dirty 
-                  || busquedaForm.controls.nombre?.touched)" class="text-danger">
+                  <div *ngIf="busquedaForm.get('nombre')?.hasError(validation.type) && 
+                  (busquedaForm.get('nombre')?.dirty || busquedaForm.get('nombre')?.touched)">
                     {{validation.message}}
                   </div>
+                  <div *ngIf="busquedaForm.get('nombre')?.hasError('minlength')">
+                    se requiere de al menos 3 caracteres
+                </div>
                 </ng-container>
               </div>
             </form>
@@ -34,7 +40,7 @@
 
       <div class="col-12 col-md-7 mb-2 mt-lg-0 mt-md-3 g-0 w-table overflow-auto">
         
-        <div class="px-3" *ngIf="equipo.length == 0 && heroe.length == 0">
+        <div class="px-3" *ngIf="equipo.length == 0 && superheroe.length == 0;">
           <h4 class="text-white my-3">No cuenta con ningun heroe en su equipo</h4>
           <h5 class="text-white">Para añadir un nuevo heroe, escriba en el buscador el 
             nombre del heroe que desea añadir
@@ -42,9 +48,10 @@
         </div>
 
         <!-- resultados de busqueda -->
-        <div class="row d-flex justify-content-center">
+        <div class="row d-flex" [ngClass]="superheroe.length > 3 ? 'justify-content-center' : 
+          'justify-content-start' ">
           <div class="col-4 col-xxl-2 col-lg-3 bg-light pb-2 px-1 border 
-          border-1 rounded" *ngFor="let h of heroe">
+          border-1 rounded" *ngFor="let h of superheroe">
             <div class="col p-2">
               <img src="{{h.image.url}}" class="img-thumbnail" alt="...">
             </div>
@@ -70,8 +77,8 @@
         <h5 *ngIf="equipo.length != 0" class="text-center text-white">Formacion actual</h5>
         <div class="row mt-3 d-flex justify-content-center" *ngIf="equipo.length != 0">
           <div class="col-xxl-3 col-lg-4 col-md-6 border border-2 bg-light rounded" 
-          *ngFor="let e of equipo dos">
-            <div class="row g-0">
+          *ngFor="let e of equipo">
+            <div class="row">
               <div class="col-lg text-center py-2 py-xxl-5 px-xxl-4">
                 <img src="{{e.image.url}}" class="img-thumbnail" alt="">
                 <p class="fs fw-bold m-0">{{e.name}}</p>

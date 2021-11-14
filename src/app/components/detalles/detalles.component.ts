@@ -25,7 +25,6 @@ export class DetallesComponent implements OnInit {
     axios.get(`${this.url}/${id}`).then((res: any) => {
     if(res.data.error) this.toast.error('Error al encontrar la informacion del personaje','')
       else {
-        console.log(this.heroe)
         this.heroe.push(res.data);
       }
     })

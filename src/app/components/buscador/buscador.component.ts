@@ -11,14 +11,14 @@ import { Router } from '@angular/router';
   styleUrls: ['./buscador.component.css']
 })
 export class BuscadorComponent implements OnInit {
-  heroe: any[] = [];
+  superheroe: any[] = [];
   equipo: any[] = [];
   busquedaForm: FormGroup;
   url = environment.URL;
 
   validation_messages = {
     nombre: [
-      { type: "minLength", message: "ingrese al menos 3 letras"}
+      { type: "required", message: "ingrese un nombre o frase"}
     ]
   }
 
@@ -26,6 +26,7 @@ export class BuscadorComponent implements OnInit {
     private route: Router) {
     this.busquedaForm = this.formB.group({
       nombre: new FormControl("", Validators.compose([
+        Validators.required,
         Validators.minLength(3)
       ]))
     })
@@ -33,44 +34,64 @@ export class BuscadorComponent implements OnInit {
 
   ngOnInit(): void {
     this.equipo = JSON.parse(localStorage.getItem('equipo') || '[]');
-    const nombre = 'bat'
-    this.buscar(nombre);
   }
 
   buscar(value: any){
-    // this.heroe = [];
-    // const name = value.nombre;
-    axios.get(`${this.url}/search/${value}`).then((res: any) => {
-    if(res.data.error) 
-    this.toast.error(`No se encontro ningun personaje con el nombre "${name}""`, 'Nombre invalido');
-      else {
-        this.heroe = res.data.results
-      }
-    })
+    if(this.busquedaForm.valid === true
+    || this.busquedaForm.get('nombre')?.hasError('minLength') === true){
+      this.superheroe = [];
+      const name = value.nombre;
+      axios.get(`${this.url}/search/${name}`).then((res: any) => {
+      if(res.data.error) 
+      this.toast.error(`No se encontro ningun personaje con el nombre "${name}""`, 'Nombre invalido');
+        else {
+          this.superheroe = res.data.results
+        }
+      })
+    }else {
+      this.toast.error("se requiere de un nombre o frase de al menos 3 caracteres", 'Valores no validos')
+    }
   }
 
   agregar(id: string){
     if(this.equipo.length == 0){
-      for(const heroe of this.heroe){
-        if(heroe.id == id){
-          this.equipo.push(heroe);
+      for(const superheroe of this.superheroe){
+        if(superheroe.id == id){
+          this.equipo.push(superheroe);
           localStorage.setItem('equipo', JSON.stringify(this.equipo));
-          this.toast.success(`el personaje ha sido agregado a su equipo`, `Personaje ${heroe.name} agregado`)
+          this.toast.success(`el personaje ha sido agregado a su equipo`, `Personaje ${superheroe.name} agregado`)
         }
       }
     }else {
       if(this.equipo.length == 6){
         this.toast.warning('no se puede añadir mas personajes, su equipo ya esta completo', 'Error al añadir')
       }else {
-        if(this.equipo.some(heroe => heroe.id == id)){
+        if(this.equipo.some(superheroe => superheroe.id == id)){
           this.toast.warning(`el personaje ya se encuentra añadido en su equipo`, 'Error al añadir')
           return
         }else {
-          for(const heroe of this.heroe){
-            if(heroe.id == id){
-              this.equipo.push(heroe);
+          const heroes: any[] = [];
+          const villanos: any[] = [];
+          for(const superheroe of this.equipo){
+            if(superheroe.biography.alignment == 'good') heroes.push(superheroe);
+            if(superheroe.biography.alignment == 'bad') villanos.push(superheroe);
+          }
+          for(const superheroe of this.superheroe){
+            let nuevo = true;
+            if(superheroe.biography.alignment == 'good' && heroes.length == 3){
+              this.toast.warning('su equipo ya cuenta con 3 heroes, no se puede añadir mas heroes',
+              'Error al añadir el personaje');
+              nuevo = false;
+            }
+            if(superheroe.biography.alignment == 'bad' && villanos.length == 3){
+              this.toast.warning('su equipo ya cuenta con 3 villanos, no se puede añadir mas villanos',
+              'Error al añadir el personaje');
+              nuevo = false;
+            }
+            if(superheroe.id == id && nuevo === true){
+              this.equipo.push(superheroe);
               localStorage.setItem('equipo', JSON.stringify(this.equipo));
-              this.toast.success(`el personaje ha sido añadido a su equipo`, `Personaje ${heroe.name} añadido`)
+              this.toast.success(`el personaje ha sido añadido a su equipo`, `Personaje ${superheroe.name} añadido`)
             }
           }
         }
