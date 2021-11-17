@@ -1,4 +1,3 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import axios from 'axios';
 import { environment } from '../../environments/environment'
@@ -8,9 +7,15 @@ import { environment } from '../../environments/environment'
 })
 export class ServiceService {
   url = environment.URL;
-  logueado: boolean | undefined;
   
-  constructor(private http: HttpClient) { }
+  constructor() { }
 
+  busquedaNombre(nombre: string){
+    return axios.get(`${this.url}/search/${nombre}`).then() 
+  }
+
+  busquedaID(id: string){
+    return axios.get(`${this.url}/${id}`).then()
+  }
 
 }

@@ -14,17 +14,17 @@
       <div class="row px-2">
         <div class="col-12 my-1 rounded bg-card" *ngFor="let e of equipo">
           <div class="row d-flex justify-content-center">
-            <div class="col-11 col-md-3 my-auto p-2 p-xl-3 p-lg-1">
+            <div class="col-11 col-md-3 my-auto p-2 p-lg-1">
               <img src="{{e.image.url}}" class="img-thumbnail image rounded" alt="">
             </div>
             <div class="col-11 col-md-9 pb-2 pb-md-0">
-              <div class="row py-0 py-xl-2 px-xl-3 px-1 d-flex justify-content-center">
-                <div class="col-12 d-flex px-3 py-0 my-2 my-xl-3 my-md-3">
+              <div class="row px-xl-3 px-1 d-flex justify-content-center">
+                <div class="col-12 d-flex px-3 py-0 my-2 my-xl-3 my-lg-2 my-md-3">
                   <h5 class="fw-bold my-auto flex-grow-1">{{e.name}}</h5>
                   <button class="m-0 btn btn-danger py-1" (click)="id = e.id" data-bs-toggle="modal" 
                   data-bs-target="#borrarAlert">Borrar</button>
                 </div>
-                <div class="row bg-light rounded p-0">
+                <div class="row bg-light rounded p-0 mb-1">
                   <p class="col-6 col-lg-6 col-md-4 my-1 fs">Combate: {{e.powerstats.combat}}</p>
                   <p class="col-6 col-lg-6 col-md-4 my-1 fs">Resistencia: {{e.powerstats.durability}}</p>
                   <p class="col-6 col-lg-6 col-md-4 my-1 fs">Inteligencia: {{e.powerstats.intelligence}}</p>

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { environment } from '../../../environments/environment'
-import axios from 'axios';
+import { ServiceService } from '../../servicios/service.service'
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 
@@ -14,7 +13,6 @@ export class BuscadorComponent implements OnInit {
   superheroe: any[] = [];
   equipo: any[] = [];
   busquedaForm: FormGroup;
-  url = environment.URL;
 
   validation_messages = {
     nombre: [
@@ -23,7 +21,7 @@ export class BuscadorComponent implements OnInit {
   }
 
   constructor(private formB: FormBuilder, private toast: ToastrService,
-    private route: Router) {
+    private route: Router, private servicio: ServiceService) {
     this.busquedaForm = this.formB.group({
       nombre: new FormControl("", Validators.compose([
         Validators.required,
@@ -41,12 +39,11 @@ export class BuscadorComponent implements OnInit {
     || this.busquedaForm.get('nombre')?.hasError('minLength') === true){
       this.superheroe = [];
       const nombre = value.nombre;
-      axios.get(`${this.url}/search/${nombre}`).then((res: any) => {
-      if(res.data.error) 
-      this.toast.error(`No se encontro ningun personaje con el nombre "${nombre}"`, 'Nombre invalido');
-        else {
-          this.superheroe = res.data.results
+      this.servicio.busquedaNombre(nombre).then((res: any) => {
+        if(res.data.error){
+          this.toast.error(`No se encontro ningun personaje con el nombre "${nombre}"`, 'Nombre invalido');
         }
+        else this.superheroe = res.data.results
       })
     }else {
       this.toast.error("se requiere de un nombre o frase de al menos 3 caracteres", 'Valores no validos')

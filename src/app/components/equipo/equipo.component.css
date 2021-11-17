@@ -11,12 +11,6 @@
 .fs {
     font-size: 18px;
 }
-.uno {
-    border: crimson solid;
-}
-.dos {
-    border: steelblue solid;
-}
 .bg-cont {
     background-color: #212529;
 }
@@ -27,7 +21,7 @@
     height: max-content;
 }
 .cards {
-    height: 600px;
+    height: 620px;
 }
 
 .cards::-webkit-scrollbar {
