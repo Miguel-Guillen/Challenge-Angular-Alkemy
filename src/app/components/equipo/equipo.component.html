@@ -1,6 +1,6 @@
 <app-navbar></app-navbar>
 <div class="container-fluid bg-cont">
-  <div class="row py-4 mx-lg-5 mx-2">
+  <div class="row py-4 mx-3 mx-md-4 mx-xl-5">
 
     <div class="row ms-3" *ngIf="equipo.length == 0">
       <h4 class="text-white my-3">No tiene ningun heroe en su equipo</h4>
@@ -9,64 +9,85 @@
       </h5>
     </div>
 
-    <div class="col-lg-7 p-0 overflow-auto h-card">
-      <div class="row card border-white border-3 rounded mt-1 mb-2 mx-sm-3 bg-card
-      d-flex"
-      *ngFor="let e of equipo">
-        <div class="row g-0">
-          <div class="col-3 col-xs-2 text-center">
-            <img src="{{e.image.url}}" class="img-thumbnail rounded image" alt="">
-            <p class="col fs fw-bold">{{e.name}}</p>
-          </div>
-          <div class="col-9 col-xs-10">
-            <div class="card-body d-flex align-items-center">
-              <div class="row">
-                <p class="col-6 col-md-4 col-lg-6 fs">Combate: {{e.powerstats.combat}}</p>
-                <p class="col-6 col-md-4 col-lg-6 fs">Resistencia: {{e.powerstats.durability}}
-                  <button class="btn btn-danger float-end" (click)="eliminar(e.id)">X</button>
-                </p>
-                <p class="col-6 col-md-4 col-lg-6 fs">Inteligencia: {{e.powerstats.intelligence}}</p>
-                <p class="col-6 col-md-4 col-lg-6 fs">Poder: {{e.powerstats.power}}</p>
-                <p class="col-6 col-md-4 col-lg-6 fs">Velocidad: {{e.powerstats.speed}}</p>
-                <p class="col-6 col-md-4 col-lg-6 fs">Fuerza: {{e.powerstats.strength}}</p>
-                <p class="col-6 col-md-6 col-lg-6 fs">Afiliacion: {{e.biography.alignment}}</p>
+    <div class="col-lg-7 mt-2 my-xxl-5 mx-lg-0 mx-md-2 overflow-auto cards">
+
+      <div class="row px-2">
+        <div class="col-12 my-1 rounded bg-card" *ngFor="let e of equipo">
+          <div class="row d-flex justify-content-center">
+            <div class="col-11 col-md-3 my-auto p-2 p-xl-3 p-lg-1">
+              <img src="{{e.image.url}}" class="img-thumbnail image rounded" alt="">
+            </div>
+            <div class="col-11 col-md-9 pb-2 pb-md-0">
+              <div class="row py-0 py-xl-2 px-xl-3 px-1 d-flex justify-content-center">
+                <div class="col-12 d-flex px-3 py-0 my-2 my-xl-3 my-md-3">
+                  <h5 class="fw-bold my-auto flex-grow-1">{{e.name}}</h5>
+                  <button class="m-0 btn btn-danger py-1" (click)="id = e.id" data-bs-toggle="modal" 
+                  data-bs-target="#borrarAlert">Borrar</button>
+                </div>
+                <div class="row bg-light rounded p-0">
+                  <p class="col-6 col-lg-6 col-md-4 my-1 fs">Combate: {{e.powerstats.combat}}</p>
+                  <p class="col-6 col-lg-6 col-md-4 my-1 fs">Resistencia: {{e.powerstats.durability}}</p>
+                  <p class="col-6 col-lg-6 col-md-4 my-1 fs">Inteligencia: {{e.powerstats.intelligence}}</p>
+                  <p class="col-6 col-lg-6 col-md-4 my-1 fs">Poder: {{e.powerstats.power}}</p>
+                  <p class="col-6 col-lg-6 col-md-4 my-1 fs">Velocidad: {{e.powerstats.speed}}</p>
+                  <p class="col-6 col-lg-6 col-md-4 my-1 fs">Fuerza: {{e.powerstats.strength}}</p>
+                  <p class="col-6 col-lg-6 col-md-6 my-1 fs">Afiliacion: {{e.biography.alignment}}</p>
+                </div>
               </div>
             </div>
           </div>
+
+          <div class="modal fade" id="borrarAlert" tabindex="-1"  aria-hidden="true"
+          aria-labelledby="exampleModalLabel">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">¿Esta seguro de quitar este persona de su equipo?</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                  <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="eliminar(id)">Borrar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
+
     </div>
 
-    <div class="col-lg-5 g-0 d-flex">
-      <div class="row g-0 w-100">
-        <div class="row g-0">
-          <div *ngIf="equipo.length > 0" class="d-flex align-items-center">
-            <div class="col bg-card rounded border border-white border-3 mx-md-5" 
-            *ngFor="let t of total">
-              <div class="row row-cols-2 py-1 g-0">
-                <div class="col py-2 px-4">
-                  <p class="fs m-0 fw-bold">Alineacion: {{valor}}</p>
-                  <p class="fs m-0">Peso general: {{t.peso}}Kg</p>
-                  <p class="fs m-0">Altura general: {{t.altura}}</p>
-                  <p class="fs m-0">Integrantes: {{equipo.length}}/6</p>
-                </div>
-                <div class="col py-2">
-                  <img class="img-fluid imagen rounded" src="../../../assets/img/{{valor}}.png" alt="">
-                </div>
-              </div>
-              <div class="row row-cols-2 g-0 py-2 px-4">
-                <p class="col m-0 fs">Combate: {{t.combate}}</p>
-                <p class="col m-0 fs">Resistencia: {{t.resistencia}}</p>
-                <p class="col m-0 fs">Inteligencia: {{t.inteligencia}}</p>
-                <p class="col m-0 fs">Poder: {{t.poder}}</p>
-                <p class="col m-0 fs">Velocidad: {{t.velocidad}}</p>
-                <p class="col m-0 fs">Fuerza: {{t.fuerza}}</p>
+    <div class="col-lg-5 mt-5 mt-lg-2 d-flex align-items-center">
+
+      <div class="row" *ngIf="equipo.length > 1">
+        <div class="col bg-card rounded mx-md-4" *ngFor="let t of total">
+          <div class="row g-0 py-2">
+            <div class="col-6 px-lg-3 d-flex align-items-center">
+              <div class="row">
+                <p class="fs mx-1 m-lg-0 my-1 fw-bold">Equipo: {{valor}}</p>
+                <p class="fs mx-xl-0 my-xl-1 m-lg-0 m-1">Peso promedio: {{t.peso}}kg</p>
+                <p class="fs mx-xl-0 my-xl-1 m-lg-0 m-1">Altura promedio: {{t.altura}}</p>
+                <p class="fs mx-xl-0 my-xl-1 m-lg-0 m-1">Integrantes: {{equipo.length}}/6</p>
               </div>
             </div>
+            <div class="col-4 col-lg-5 py-md-3 my-auto">
+              <img class="img-fluid rounded bg-light image" src="../../../assets/img/{{valor}}.png" alt="">
+            </div>
+          </div>
+          <div class="row g-0 py-2">
+                <p class="col-6 m-0 py-lg-0 py-1 p fs">Combate: {{t.combate}}</p>
+                <p class="col-6 m-0 py-lg-0 py-1 fs">Resistencia: {{t.resistencia}}</p>
+                <p class="col-6 m-0 py-lg-0 py-1 fs">Inteligencia: {{t.inteligencia}}</p>
+                <p class="col-6 m-0 py-lg-0 py-1 fs">Poder: {{t.poder}}</p>
+                <p class="col-6 m-0 py-lg-0 py-1 fs">Velocidad: {{t.velocidad}}</p>
+                <p class="col-6 m-0 py-lg-0 py-1 fs">Fuerza: {{t.fuerza}}</p>
           </div>
         </div>
       </div>
+
     </div>
 
   </div>
 </div>
+

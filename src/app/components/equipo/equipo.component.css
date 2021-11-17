@@ -2,25 +2,20 @@
     font-family: 'Times New Roman', Times, serif;
 }
 .rounded {
-    border-radius: 2rem !important;
-}
-.col-6 {
-    height: 18px;
-}
-.card {
-    height: 165px !important;
-}
-.card-body {
-    height: 165px !important;
-}
-.h-card {
-    height: 510px;
+    border: lightslategray solid 2px;
+    border-radius: .7rem !important;
 }
 .fw-bold {
     color: rgb(155, 99, 14);
 }
 .fs {
-    font-size: 19px;
+    font-size: 18px;
+}
+.uno {
+    border: crimson solid;
+}
+.dos {
+    border: steelblue solid;
 }
 .bg-cont {
     background-color: #212529;
@@ -29,57 +24,65 @@
     background-color: #d3d7ff;
 }
 .image {
-    width: 132px;
-    height: 132px;
+    height: max-content;
 }
-.imagen {
-    width: 100px;
-    height: 100px;  
+.cards {
+    height: 600px;
 }
-.h-card::-webkit-scrollbar {
+
+.cards::-webkit-scrollbar {
     -webkit-appearance: none;
 }
-.h-card::-webkit-scrollbar:vertical {
+.cards::-webkit-scrollbar:vertical {
     width: 10px;
 }
-.h-card::-webkit-scrollbar:horizontal {
+.cards::-webkit-scrollbar:horizontal {
     width: 12px;
 }
-.h-card::-webkit-scrollbar-button:increment,.contenedor::-webkit-scrollbar-button {
+.cards::-webkit-scrollbar-button:increment,.contenedor::-webkit-scrollbar-button {
     display: none;
 }
-.h-card::-webkit-scrollbar-track {
+.cards::-webkit-scrollbar-track {
     border-radius: 10px;
 }
-.h-card::-webkit-scrollbar-thumb {
+.cards::-webkit-scrollbar-thumb {
     background-color: #797979;
     border-radius: 20px;
-    border: solid #b8b8b9 2px;
+    border: solid #9a9a9b 2px;
 }
-.h-card::-webkit-scrollbar-thumb:hover {
+.cards::-webkit-scrollbar-thumb:hover {
     background-color: #b3b3b3;
+}
+
+@media (width > 1700px){
+    .fs {
+        font-size: 26px;
+    }
+    .cards {
+        height: 860px;
+    }
+    .image {
+        width: 270px;
+    }
+}
+
+@media (max-width: 1024px){
+    .fs {
+        font-size: 16px;
+    }
 }
 
 @media (max-width: 768px){
     .fs {
         font-size: 17px;
     }
-    .image {
-        width: 120px;
-        height: 120px;
-    }
-    .imagen {
-        width: 90px;
-        height: 90px;
+    .cards {
+        height: max-content;
     }
 }
 
-@media (max-width: 576px){
+@media (width < 576px){
     .fs {
-        font-size: 16px;
-    }
-    .image {
-        width: 80px;
-        height: 80px;
+        font-size: 14px;
     }
 }

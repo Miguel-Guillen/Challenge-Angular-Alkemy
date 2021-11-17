@@ -11,11 +11,11 @@ h5 {
 .bg-div {
  background-color: #00314c;
 }
-.uno {
-    border: crimson solid;
-}
-.dos {
-    border: darkcyan solid;
+
+@media (width > 1440px){
+    p {
+        font-size: 26px;
+    }
 }
 
 @media (max-width: 992px){

@@ -1,18 +1,18 @@
 <app-navbar></app-navbar>
 <div class="container-fluid pt-4 bg-cont">
-    <div class="row mx-lg-5 mx-3 border border-3 bg-light rounded">
+    <div class="row mx-lg-4 mx-2 border border-3 bg-light rounded">
 
         <div class="col-xl-4 col-lg-5 col-md-6 border border-2">
             <div class="row py-2 px-1">
-                <div class="col-6 g-0 my-auto">
+                <div class="col-6 p-1 my-auto">
                     <img src="{{heroe[0].image.url}}" class="img-thumbnail rounded" alt="">
                 </div>
-                <div class="col-6">
-                    <h5 class="mx-1 fw-bold border-bottom border-2">{{heroe[0].name}}</h5>
-                    <p class="mx-xl-2 mx-1 my-1 border-bottom border-2">Nombre: {{heroe[0].biography['full-name']}}</p>
-                    <p class="mx-xl-2 mx-1 my-1 border-bottom border-2">Alter egos: {{heroe[0].biography['alter-egos']}}</p>
-                    <p class="mx-xl-2 mx-1 my-1 border-bottom border-2">Alias: {{heroe[0].biography.aliases}}</p>
-                    <p class="mx-xl-2 mx-1 my-1">Afiliacion: {{heroe[0].biography.alignment}}</p>
+                <div class="col-6 py-lg-1 px-lg-2 p-1">
+                    <h5 class="fw-bold border-bottom border-2">{{heroe[0].name}}</h5>
+                    <p class="my-1 border-bottom border-2">Nombre: {{heroe[0].biography['full-name']}}</p>
+                    <p class="my-1 border-bottom border-2">Alter egos: {{heroe[0].biography['alter-egos']}}</p>
+                    <p class="my-1 border-bottom border-2">Alias: {{heroe[0].biography.aliases}}</p>
+                    <p class="my-1">Afiliacion: {{heroe[0].biography.alignment}}</p>
                 </div>
             </div>
             <div class="row py-1 px-0">

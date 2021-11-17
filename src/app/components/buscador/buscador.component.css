@@ -17,6 +17,14 @@ h5 {
 .w-table {
     height: 460px;
 }
+.border-villain {
+    border: rgba(220, 20, 60, 0.671) solid 2px;
+    border-radius: 10px;
+}
+.border-heroe{
+    border: rgba(0, 128, 0, 0.856) solid 2px;
+    border-radius: 10px;
+}
 
 .w-table::-webkit-scrollbar {
     -webkit-appearance: none;
@@ -57,7 +65,8 @@ h5 {
         font-size: 16px;
     }
     .w-table {
-        height: 480px;
+        min-height: 80vh;
+        height: max-content;
     }
     #equipo {
         display: none;

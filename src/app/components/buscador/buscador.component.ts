@@ -40,10 +40,10 @@ export class BuscadorComponent implements OnInit {
     if(this.busquedaForm.valid === true
     || this.busquedaForm.get('nombre')?.hasError('minLength') === true){
       this.superheroe = [];
-      const name = value.nombre;
-      axios.get(`${this.url}/search/${name}`).then((res: any) => {
+      const nombre = value.nombre;
+      axios.get(`${this.url}/search/${nombre}`).then((res: any) => {
       if(res.data.error) 
-      this.toast.error(`No se encontro ningun personaje con el nombre "${name}""`, 'Nombre invalido');
+      this.toast.error(`No se encontro ningun personaje con el nombre "${nombre}"`, 'Nombre invalido');
         else {
           this.superheroe = res.data.results
         }
@@ -63,6 +63,7 @@ export class BuscadorComponent implements OnInit {
         }
       }
     }else {
+
       if(this.equipo.length == 6){
         this.toast.warning('no se puede añadir mas personajes, su equipo ya esta completo', 'Error al añadir')
       }else {
@@ -70,20 +71,22 @@ export class BuscadorComponent implements OnInit {
           this.toast.warning(`el personaje ya se encuentra añadido en su equipo`, 'Error al añadir')
           return
         }else {
+
           const heroes: any[] = [];
           const villanos: any[] = [];
           for(const superheroe of this.equipo){
             if(superheroe.biography.alignment == 'good') heroes.push(superheroe);
             if(superheroe.biography.alignment == 'bad') villanos.push(superheroe);
-          }
+          };
+          
           for(const superheroe of this.superheroe){
             let nuevo = true;
-            if(superheroe.biography.alignment == 'good' && heroes.length == 3){
+            if(superheroe.id == id && superheroe.biography.alignment == 'good' && heroes.length == 3){
               this.toast.warning('su equipo ya cuenta con 3 heroes, no se puede añadir mas heroes',
               'Error al añadir el personaje');
               nuevo = false;
             }
-            if(superheroe.biography.alignment == 'bad' && villanos.length == 3){
+            if(superheroe.id == id && superheroe.biography.alignment == 'bad' && villanos.length == 3){
               this.toast.warning('su equipo ya cuenta con 3 villanos, no se puede añadir mas villanos',
               'Error al añadir el personaje');
               nuevo = false;
@@ -94,8 +97,10 @@ export class BuscadorComponent implements OnInit {
               this.toast.success(`el personaje ha sido añadido a su equipo`, `Personaje ${superheroe.name} añadido`)
             }
           }
+
         }
       }
+
     }
   }
 

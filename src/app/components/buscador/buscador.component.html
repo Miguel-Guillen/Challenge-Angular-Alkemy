@@ -80,7 +80,9 @@
           *ngFor="let e of equipo">
             <div class="row">
               <div class="col-lg text-center py-2 py-xxl-5 px-xxl-4">
-                <img src="{{e.image.url}}" class="img-thumbnail" alt="">
+                <img src="{{e.image.url}}" class="img-thumbnail" alt=""
+                [ngClass]="{'border-villain': e.biography.alignment == 'bad', 
+                'border-heroe': e.biography.alignment == 'good'}">
                 <p class="fs fw-bold m-0">{{e.name}}</p>
               </div>
             </div>
