@@ -7,6 +7,7 @@ import { environment } from '../../environments/environment'
 })
 export class ServiceService {
   url = environment.URL;
+  urlLogin = 'http://challenge-react.alkemy.org/';
   
   constructor() { }
 
@@ -16,6 +17,13 @@ export class ServiceService {
 
   busquedaID(id: string){
     return axios.get(`${this.url}/${id}`).then()
+  }
+
+  login(credenciales: any){
+    return axios.post(this.url, { 
+      email: credenciales.correo, 
+      password: credenciales.contrasena
+    }, { headers: { 'Content-Type': 'application/json' } }).then()
   }
 
 }

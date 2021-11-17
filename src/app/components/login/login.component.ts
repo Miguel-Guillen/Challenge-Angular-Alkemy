@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ToastrService } from 'ngx-toastr';
-import axios from 'axios';
 import { Router } from '@angular/router';
+import { ServiceService } from 'src/app/servicios/service.service';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +10,6 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
-  url = 'http://challenge-react.alkemy.org/';
   token = ''
   loginInvalid = false;
 
@@ -25,7 +23,7 @@ export class LoginComponent implements OnInit {
     ]
   }
 
-  constructor(private formB: FormBuilder, private toast: ToastrService,
+  constructor(private formB: FormBuilder, private servicio: ServiceService,
     private route: Router) {
     this.loginForm = this.formB.group({
       correo: new FormControl("", Validators.compose([
@@ -44,15 +42,10 @@ export class LoginComponent implements OnInit {
 
   login(value: any){
     if(!this.loginForm.invalid){
-      axios.post(this.url, { 
-        email: value.correo, 
-        password: value.contrasena
-      }, { headers: { 'Content-Type': 'application/json' } }).then((res: any) => {
-          this.token = res.data;
-          localStorage.setItem('token', JSON.stringify(this.token));
-          this.route.navigate(['equipo']);
-      }).catch((err: any) => {
-        this.loginInvalid = true;
+      this.servicio.login(value).then((res: any) => {
+        this.token = res.data;
+        localStorage.setItem('token', JSON.stringify(this.token));
+        this.route.navigate(['equipo']);
       })
     }else {
       this.loginInvalid = true;
