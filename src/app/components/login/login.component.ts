@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
 
   login(value: any){
     if(!this.loginForm.invalid){
-      this.servicio.login(value).then((res: any) => {
+      this.servicio.login(value).subscribe((res: any) => {
         this.token = res.data;
         localStorage.setItem('token', JSON.stringify(this.token));
         this.route.navigate(['equipo']);

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ServiceService } from 'src/app/servicios/service.service';
+
+import { Heroe } from 'src/app/models/heroe';
 
 @Component({
   selector: 'app-detalles',
@@ -9,21 +11,33 @@ import { ServiceService } from 'src/app/servicios/service.service';
   styleUrls: ['./detalles.component.css']
 })
 export class DetallesComponent implements OnInit {
-  heroe: any[] = [];
+  heroe: Heroe | undefined;
 
   constructor(private toast: ToastrService, private route: ActivatedRoute,
-    private servicio: ServiceService) { }
+    private servicio: ServiceService, private router: Router) { }
 
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id');
+    const id: any = this.route.snapshot.paramMap.get('id');
     this.infoHeroe(id);
   }
 
-  infoHeroe(id: any){
-    this.heroe = [];
-    this.servicio.busquedaID(id).then((res: any) => {
-      if(res.data.error) this.toast.error('Error al encontrar la informacion del personaje','')
-      else this.heroe.push(res.data);
+  infoHeroe(id: string){
+    let response = 'success';
+  
+    this.servicio.busquedaID(id).subscribe((res: any) => {
+      if(res.response == response){
+        this.heroe = res;
+      }else {
+        console.log(res);
+        this.toast.error('Error al encontrar la informacion del personaje', '', 
+        { positionClass: 'toast-bottom-right' });
+        this.router.navigate(['/buscar']);
+      }
+    }, err => {
+      console.log(err);
+      this.toast.error('Ha ocurrido un error cargar los datos del superheroe',
+      'Error al cargar la informacion');
+      this.router.navigate(['/buscar']);
     })
   }
 

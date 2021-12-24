@@ -4,6 +4,8 @@ import { HttpClientModule } from '@angular/common/http'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { StoreModule } from '@ngrx/store';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,7 +15,7 @@ import { EquipoComponent } from './components/equipo/equipo.component';
 import { DetallesComponent } from './components/detalles/detalles.component';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { FooterComponent } from './components/shared/footer/footer.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { heroeReducer } from './actions/heroe.reduce';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
-    NgbModule
+    NgbModule,
+    StoreModule.forRoot({ heroes: heroeReducer })
   ],
   providers: [],
   bootstrap: [AppComponent]

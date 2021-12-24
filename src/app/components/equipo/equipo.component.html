@@ -12,7 +12,7 @@
     <div class="col-lg-7 mt-2 my-xxl-5 mx-lg-0 mx-md-2 overflow-auto cards">
 
       <div class="row px-2">
-        <div class="col-12 my-1 rounded bg-card" *ngFor="let e of equipo">
+        <div class="col-12 my-1 rounded bg-card" *ngFor="let e of equipo$ | async">
           <div class="row d-flex justify-content-center">
             <div class="col-11 col-md-3 my-auto p-2 p-lg-1">
               <img src="{{e.image.url}}" class="img-thumbnail image rounded" alt="">
@@ -66,8 +66,8 @@
             <div class="col-6 px-lg-3 d-flex align-items-center">
               <div class="row">
                 <p class="fs mx-1 m-lg-0 my-1 fw-bold">Equipo: {{valor}}</p>
-                <p class="fs mx-xl-0 my-xl-1 m-lg-0 m-1">Peso promedio: {{t.peso}}kg</p>
-                <p class="fs mx-xl-0 my-xl-1 m-lg-0 m-1">Altura promedio: {{t.altura}}</p>
+                <p class="fs mx-xl-0 my-xl-1 m-lg-0 m-1">Peso promedio: {{t.weight}}kg</p>
+                <p class="fs mx-xl-0 my-xl-1 m-lg-0 m-1">Altura promedio: {{t.height | number: '1.2-2'}}M</p>
                 <p class="fs mx-xl-0 my-xl-1 m-lg-0 m-1">Integrantes: {{equipo.length}}/6</p>
               </div>
             </div>
@@ -76,12 +76,12 @@
             </div>
           </div>
           <div class="row g-0 py-2">
-                <p class="col-6 m-0 py-lg-0 py-1 p fs">Combate: {{t.combate}}</p>
-                <p class="col-6 m-0 py-lg-0 py-1 fs">Resistencia: {{t.resistencia}}</p>
-                <p class="col-6 m-0 py-lg-0 py-1 fs">Inteligencia: {{t.inteligencia}}</p>
-                <p class="col-6 m-0 py-lg-0 py-1 fs">Poder: {{t.poder}}</p>
-                <p class="col-6 m-0 py-lg-0 py-1 fs">Velocidad: {{t.velocidad}}</p>
-                <p class="col-6 m-0 py-lg-0 py-1 fs">Fuerza: {{t.fuerza}}</p>
+                <p class="col-6 m-0 py-lg-0 py-1 p fs">Combate: {{t.combat}}</p>
+                <p class="col-6 m-0 py-lg-0 py-1 fs">Resistencia: {{t.durability}}</p>
+                <p class="col-6 m-0 py-lg-0 py-1 fs">Inteligencia: {{t.intelligence}}</p>
+                <p class="col-6 m-0 py-lg-0 py-1 fs">Poder: {{t.power}}</p>
+                <p class="col-6 m-0 py-lg-0 py-1 fs">Velocidad: {{t.speed}}</p>
+                <p class="col-6 m-0 py-lg-0 py-1 fs">Fuerza: {{t.strength}}</p>
           </div>
         </div>
       </div>

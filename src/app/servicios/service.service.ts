@@ -1,29 +1,47 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import axios from 'axios';
+import { Observable } from 'rxjs';
+// import axios from 'axios';
+
 import { environment } from '../../environments/environment'
+import { Heroe } from '../models/heroe';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ServiceService {
   url = environment.URL;
-  urlLogin = 'http://challenge-react.alkemy.org/';
+  url_login = environment.URL_Login
   
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
-  busquedaNombre(nombre: string){
-    return axios.get(`${this.url}/search/${nombre}`).then() 
+  busquedaNombre(nombre: string): Observable<Heroe[]>{
+    const search = 'search/';
+    let headers = new HttpHeaders().set(
+      'Content-Type', 'application/json',
+    );
+
+    return this.http.get<Heroe[]>(this.url + search + nombre, { headers: headers });
   }
 
-  busquedaID(id: string){
-    return axios.get(`${this.url}/${id}`).then()
+  busquedaID(id: string): Observable<Heroe>{
+    let headers = new HttpHeaders().set(
+      'Content-Type', 'application/json',
+    );
+
+    return this.http.get<Heroe>(this.url + id, { headers: headers });
   }
 
-  login(credenciales: any){
-    return axios.post(this.url, { 
+  login(credenciales: any): Observable<any>{
+    let headers = new HttpHeaders().set(
+      'Content-Type', 'application/json',
+    );
+    const data = {
       email: credenciales.correo, 
       password: credenciales.contrasena
-    }, { headers: { 'Content-Type': 'application/json' } }).then()
+    };
+
+    return this.http.post(this.url_login, data, { headers: headers });
   }
 
 }
