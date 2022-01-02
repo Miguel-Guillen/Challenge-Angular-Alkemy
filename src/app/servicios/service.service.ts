@@ -12,36 +12,28 @@ import { Heroe } from '../models/heroe';
 export class ServiceService {
   url = environment.URL;
   url_login = environment.URL_Login
+  headers = new HttpHeaders();
   
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    this.headers.set('Content-Type', 'application/json');
+  }
 
   busquedaNombre(nombre: string): Observable<Heroe[]>{
     const search = 'search/';
-    let headers = new HttpHeaders().set(
-      'Content-Type', 'application/json',
-    );
-
-    return this.http.get<Heroe[]>(this.url + search + nombre, { headers: headers });
+    return this.http.get<Heroe[]>(this.url + search + nombre, { headers: this.headers });
   }
 
   busquedaID(id: string): Observable<Heroe>{
-    let headers = new HttpHeaders().set(
-      'Content-Type', 'application/json',
-    );
-
-    return this.http.get<Heroe>(this.url + id, { headers: headers });
+    return this.http.get<Heroe>(this.url + id, { headers: this.headers });
   }
 
   login(credenciales: any): Observable<any>{
-    let headers = new HttpHeaders().set(
-      'Content-Type', 'application/json',
-    );
     const data = {
       email: credenciales.correo, 
       password: credenciales.contrasena
     };
 
-    return this.http.post(this.url_login, data, { headers: headers });
+    return this.http.post(this.url_login, data, { headers: this.headers });
   }
 
 }

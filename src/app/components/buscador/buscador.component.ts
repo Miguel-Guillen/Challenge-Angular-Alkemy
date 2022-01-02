@@ -58,7 +58,8 @@ export class BuscadorComponent implements OnInit {
           'Nombre invalido');
         }else{
           this.superheroe = res.results;
-          this.toast.success('superheroes encontrados');
+          this.toast.success('superheroes encontrados', '',
+          { positionClass: 'toast-bottom-right' });
         };
       }, err => {
         this.toast.error('Ha ocurrido un error al realizar la busqueda', 'Error al buscar');
@@ -106,7 +107,8 @@ export class BuscadorComponent implements OnInit {
             this.store.dispatch(action);
             this.equipo.push(superheroe);
             localStorage.setItem('equipo', JSON.stringify(this.equipo));
-            this.toast.success(`El Personaje ${superheroe.name} ha sido añadido a su equipo`);
+            this.toast.success(`El Personaje ${superheroe.name} ha sido añadido a su equipo`,
+            '', { positionClass: 'toast-bottom-right' });
           }
 
         }

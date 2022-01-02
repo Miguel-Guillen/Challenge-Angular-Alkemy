@@ -46,6 +46,9 @@ export class LoginComponent implements OnInit {
         this.token = res.data;
         localStorage.setItem('token', JSON.stringify(this.token));
         this.route.navigate(['equipo']);
+      }, err => {
+        this.loginInvalid = true;
+        console.log(err);
       })
     }else {
       this.loginInvalid = true;
