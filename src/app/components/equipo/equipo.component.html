@@ -1,53 +1,58 @@
 <app-navbar></app-navbar>
 <div class="container-fluid bg-cont">
-  <div class="row py-4 mx-3 mx-md-4 mx-xl-5">
+  <div class="row d-flex justify-content-evenly align-items-center py-3">
 
-    <div class="row ms-3" *ngIf="equipo.length == 0">
+    <ng-container *ngIf="equipo.length == 0 "class="row ms-3">
       <h4 class="text-white my-3">No tiene ningun heroe en su equipo</h4>
       <h5 class="text-white">Para buscar y agregar nuevos heroes
         <a [routerLink]="['/buscar']"> pulse aqui</a>
       </h5>
-    </div>
+    </ng-container>
 
-    <div class="col-lg-7 mt-2 my-xxl-5 mx-lg-0 mx-md-2 overflow-auto cards">
-
-      <div class="row px-2">
-        <div class="col-12 my-1 rounded bg-card" *ngFor="let e of equipo$ | async">
-          <div class="row d-flex justify-content-center">
-            <div class="col-11 col-md-3 my-auto p-2 p-lg-1">
-              <img src="{{e.image.url}}" class="img-thumbnail image rounded" alt="">
+    <!-- equipo -->
+    <div class="col-9 col-md-6 col-lg-5 order-2 order-md-1">
+      <h5 class="text-white mt-2">Integrantes del equipo</h5>
+      <div class="row">
+        <div *ngFor="let equipo of equipo$ | async" class="col-12 rounded bg-card my-2 py-2 mx-md-1">
+          <div class="row d-flex justify-content-around">
+            <div class="col-11 col-md-4 img-heroe text-center my-md-auto mb-2 mb-md-auto px-1 py-2">
+              <img src="{{equipo.image.url}}" class="img-fluid border border-secondary rounded"
+              alt="">
             </div>
-            <div class="col-11 col-md-9 pb-2 pb-md-0">
-              <div class="row px-xl-3 px-1 d-flex justify-content-center">
-                <div class="col-12 d-flex px-3 py-0 my-2 my-xl-3 my-lg-2 my-md-3">
-                  <h5 class="fw-bold my-auto flex-grow-1">{{e.name}}</h5>
-                  <button class="m-0 btn btn-danger py-1" (click)="id = e.id" data-bs-toggle="modal" 
-                  data-bs-target="#borrarAlert">Borrar</button>
+            <div class="col-11 col-md-7 d-flex align-items-center px-4 px-md-3">
+              <div class="row d-flex justify-content-center">
+                <div class="col d-flex mb-2">
+                  <h5 class="fw-bold my-auto flex-grow-1">{{equipo.name}}</h5>
+                  <button (click)="id = equipo.id" class="btn btn-outline-danger py-1"
+                  data-bs-toggle="modal" data-bs-target="#borrarAlert">
+                    <i class="fas fa-trash-alt"></i>
+                  </button>
                 </div>
-                <div class="row bg-light rounded p-0 mb-1">
-                  <p class="col-6 col-lg-6 col-md-4 my-1 fs">Combate: {{e.powerstats.combat}}</p>
-                  <p class="col-6 col-lg-6 col-md-4 my-1 fs">Resistencia: {{e.powerstats.durability}}</p>
-                  <p class="col-6 col-lg-6 col-md-4 my-1 fs">Inteligencia: {{e.powerstats.intelligence}}</p>
-                  <p class="col-6 col-lg-6 col-md-4 my-1 fs">Poder: {{e.powerstats.power}}</p>
-                  <p class="col-6 col-lg-6 col-md-4 my-1 fs">Velocidad: {{e.powerstats.speed}}</p>
-                  <p class="col-6 col-lg-6 col-md-4 my-1 fs">Fuerza: {{e.powerstats.strength}}</p>
-                  <p class="col-6 col-lg-6 col-md-6 my-1 fs">Afiliacion: {{e.biography.alignment}}</p>
+                <div class="row bg-light border border-secondary rounded p-1 p-xl-2 mb-2">
+                  <p class="col-6 my-1 p-0">Combate: {{equipo.powerstats.combat}}</p>
+                  <p class="col-6 my-1 p-0">Resistencia: {{equipo.powerstats.durability}}</p>
+                  <p class="col-6 mb-1 p-0">Poder: {{equipo.powerstats.power}}</p>
+                  <p class="col-6 mb-1 p-0">Inteligencia: {{equipo.powerstats.intelligence}}</p>
+                  <p class="col-6 mb-1 p-0">Fuerza: {{equipo.powerstats.strength}}</p>
+                  <p class="col-6 mb-1 p-0">Velocidad: {{equipo.powerstats.speed}}</p>
+                  <p class="col my-0 p-0">Afiliacion: {{equipo.biography.alignment}}</p>
                 </div>
               </div>
             </div>
           </div>
 
-          <div class="modal fade" id="borrarAlert" tabindex="-1"  aria-hidden="true"
-          aria-labelledby="exampleModalLabel">
+          <div class="modal fade" tabindex="-1"  aria-hidden="true" id="borrarAlert">
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
                   <h5 class="modal-title">¿Esta seguro de quitar este persona de su equipo?</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                  <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="eliminar(id)">Borrar</button>
+                  <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">
+                    Cancelar</button>
+                  <button (click)="eliminar(id)" class="btn btn-danger" type="button"
+                  data-bs-dismiss="modal">Borrar</button>
                 </div>
               </div>
             </div>
@@ -55,36 +60,43 @@
 
         </div>
       </div>
-
     </div>
 
-    <div class="col-lg-5 mt-5 mt-lg-2 d-flex align-items-center">
-
-      <div class="row" *ngIf="equipo.length > 1">
-        <div class="col bg-card rounded mx-md-4" *ngFor="let t of total">
-          <div class="row g-0 py-2">
-            <div class="col-6 px-lg-3 d-flex align-items-center">
+    <!-- estadisticas -->
+    <div class="col-11 col-md-5 col-xl-4 order-1 order-md-2 mb-2">
+      <h5 class="text-white ms-2 mb-3">Estado del equipo</h5>
+      <ng-container *ngIf="equipo.length > 1">
+        <div *ngFor="let estadisticas of total" class="bg-card rounded px-3 py-2 px-xl-4 py-xl-3">
+          <div class="row d-flex justify-content-center mb-3">
+            <h6 class="fw-bold mb-1">Equipo: {{valor}}</h6>
+            <div class="col-6 d-flex align-items-center p-1">
               <div class="row">
-                <p class="fs mx-1 m-lg-0 my-1 fw-bold">Equipo: {{valor}}</p>
-                <p class="fs mx-xl-0 my-xl-1 m-lg-0 m-1">Peso promedio: {{t.weight}}kg</p>
-                <p class="fs mx-xl-0 my-xl-1 m-lg-0 m-1">Altura promedio: {{t.height | number: '1.2-2'}}M</p>
-                <p class="fs mx-xl-0 my-xl-1 m-lg-0 m-1">Integrantes: {{equipo.length}}/6</p>
+                <p class="my-1">Peso promedio: {{estadisticas.weight | number: '1.2-2'}}Kg</p>
+                <p class="my-1">Altura promedio: {{estadisticas.height | number: '1.2-2'}}M</p>
+                <p class="my-1">Integrantes: {{equipo.length}}/6</p>
               </div>
             </div>
-            <div class="col-4 col-lg-5 py-md-3 my-auto">
-              <img class="img-fluid rounded bg-light image" src="../../../assets/img/{{valor}}.png" alt="">
+            <div class="col-5 my-auto img-pic">
+              <img class="img-fluid rounded bg-light" src="../../../assets/img/{{valor}}.png" alt="">
             </div>
           </div>
-          <div class="row g-0 py-2">
-                <p class="col-6 m-0 py-lg-0 py-1 p fs">Combate: {{t.combat}}</p>
-                <p class="col-6 m-0 py-lg-0 py-1 fs">Resistencia: {{t.durability}}</p>
-                <p class="col-6 m-0 py-lg-0 py-1 fs">Inteligencia: {{t.intelligence}}</p>
-                <p class="col-6 m-0 py-lg-0 py-1 fs">Poder: {{t.power}}</p>
-                <p class="col-6 m-0 py-lg-0 py-1 fs">Velocidad: {{t.speed}}</p>
-                <p class="col-6 m-0 py-lg-0 py-1 fs">Fuerza: {{t.strength}}</p>
+          <span class="fw-bold">Estadisticas</span>
+          <div class="row d-flex justify-content-around text-center">
+            <p class="col-5 border border-secondary rounded shadow-sm p-1 my-1">
+              Combate: {{estadisticas.combat}}</p>
+            <p class="col-5 border border-secondary rounded shadow-sm p-1 my-1">
+              Resistencia: {{estadisticas.durability}}</p>
+            <p class="col-5 border border-secondary rounded shadow-sm p-1 mb-1">
+              Poder: {{estadisticas.power}}</p>
+            <p class="col-5 border border-secondary rounded shadow-sm p-1 mb-1">
+              Inteligencia: {{estadisticas.intelligence}}</p>
+            <p class="col-5 border border-secondary rounded shadow-sm p-1 mb-1">
+              Fuerza: {{estadisticas.strength}}</p>
+            <p class="col-5 border border-secondary rounded shadow-sm p-1 mb-1">
+              Velocidad: {{estadisticas.speed}}</p>
           </div>
         </div>
-      </div>
+      </ng-container>
 
     </div>
 

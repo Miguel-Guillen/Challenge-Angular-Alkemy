@@ -23,13 +23,13 @@ export class DetallesComponent implements OnInit {
 
   infoHeroe(id: string){
     let response = 'success';
-  
+
     this.servicio.busquedaID(id).subscribe((res: any) => {
       if(res.response == response){
         this.heroe = res;
       }else {
         console.log(res);
-        this.toast.error('Error al encontrar la informacion del personaje', '', 
+        this.toast.error('Error al encontrar la informacion del personaje', '',
         { positionClass: 'toast-bottom-right' });
         this.router.navigate(['/buscar']);
       }

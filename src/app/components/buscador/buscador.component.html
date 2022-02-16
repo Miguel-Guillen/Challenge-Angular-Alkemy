@@ -1,22 +1,23 @@
 <app-navbar></app-navbar>
-<div class="container-fluid bg-cont p-4 min-vh-100">
+<div class="container-fluid bg-cont p-4">
   <div class="row d-flex justify-content-center">
 
     <!-- buscador -->
-    <div class="col-12 fs p-0">
+    <div class="col-12 d-flex justify-content-end p-0">
       <form [formGroup]="busquedaForm" (ngSubmit)="buscar(busquedaForm.value)">
-        <div class="d-flex col-12 col-md-6">
-          <input type="search" class="form-control bg-light d-inline" minlength="3"
-          placeholder="ejemplo: batman" formControlName="nombre" maxlength="30">
-          <button class="btn bg-light border border-1 ms-1"><i class="fas fa-search"></i></button>
+        <div class="d-flex mx-md-3">
+          <input class="form-control bg-light" formControlName="nombre"
+          placeholder="Buscar" type="search" minlength="3" maxlength="30">
+          <button class="btn bg-light border border-1"><i class="fas fa-search"></i></button>
         </div>
-        <div class="text-danger">
+        <div class="text-danger ps-4">
           <ng-container *ngFor="let validation of validation_messages.nombre">
-            <div *ngIf="busquedaForm.get('nombre')?.hasError(validation.type) && 
-            (busquedaForm.get('nombre')?.dirty || busquedaForm.get('nombre')?.touched)">
+            <div *ngIf="busquedaForm.get('nombre')?.hasError(validation.type) &&
+            (busquedaForm.get('nombre')?.touched)">
               {{validation.message}}
             </div>
-            <div *ngIf="busquedaForm.get('nombre')?.hasError('minlength')">
+            <div *ngIf="busquedaForm.get('nombre')?.hasError('minlength') &&
+            busquedaForm.get('nombre')?.dirty">
               se requiere de al menos 3 caracteres
             </div>
           </ng-container>
@@ -25,56 +26,57 @@
     </div>
 
     <!-- Equipo actual -->
-      <div class="col mt-3 mb-1 fs" *ngIf="equipo.length != 0; else noTeam" id="equipo">
-        <h6 class="text-white">Integrantes de mi equipo</h6>
+    <ng-container *ngIf="equipo.length > 0 && superheroe.length == 0">
+      <div class="col col-md-11 mt-4 mb-1" id="equipo">
         <div class="row mx-md-2">
-          <div class="col-2 px-0 pt-2" *ngFor="let e of equipo$ | async">
-            <div class="mx-1">
-              <img src="{{e.image.url}}" class="img-fluid rounded-circle" alt=""
-              [ngClass]="{'border-villain': e.biography.alignment == 'bad', 
-              'border-heroe': e.biography.alignment == 'good'}">
+          <h5 class="text-light fw-bold">Equipo actual</h5>
+          <div class="col-4 col-lg-2 px-2 pt-2" *ngFor="let miEquipo of equipo$ | async">
+            <div class="text-center">
+              <img src="{{miEquipo.image.url}}" class="img-fluid rounded" alt=""
+              [ngClass]="{'border-villain': miEquipo.biography.alignment == 'bad',
+              'border-heroe': miEquipo.biography.alignment == 'good'}">
             </div>
-            <p class="text-center px-0">{{ (e.name.length > 7)? (e.name | slice: 0:5)
-              + '..' : (e.name) }}</p>
+            <p class="text-center">{{miEquipo.name}}</p>
           </div>
         </div>
       </div>
+    </ng-container>
 
-      <!-- resultados de busqueda -->
-      <div class="col-12" *ngIf="superheroe.length > 0">
-        <p class="fw-bold m-1 fs">
-          Resultados encontrados: {{superheroe.length}}
-        </p>
-        <div class="row d-flex fs text-dark" [ngClass]="superheroe.length > 1 ?
-          'justify-content-evenly' : 'justify-content-between' ">
-          <div class="col-5 col-md-3 col-xl-2 bg-light rounded p-2 mx-2 my-1" 
-          *ngFor="let s of superheroe">
+    <!-- resultados de busqueda -->
+    <ng-container *ngIf="superheroe.length > 0">
+      <div class="col col-md-10 my-2" >
+        <p class="fw-bold m-1">Resultados encontrados: {{superheroe.length}}</p>
+        <div [ngClass]="superheroe.length > 1? 'justify-content-evenly' : 'justify-content-between' "
+          class="row d-flex">
+          <div *ngFor="let superheroe of superheroe" class="col-5 col-md-3 col-lg-2 bg-light
+          rounded p-2 my-1 m-md-2 mx-xl-2" >
             <div class="text-center">
-              <img src="{{s.image.url}}" class="image border border-dark border-3" alt="...">
+              <img src="{{superheroe.image.url}}" class="image" alt="...">
             </div>
             <div class="mx-1 mt-2 text-center">
-              <h6 class="fw-bold mx-0 my-1">{{s.name}}</h6>
-              <p class="mx-0 my-1">Afiliacion: {{s.biography.alignment}}</p>
+              <h6 class="fw-bold my-1 text-dark">{{superheroe.name}}</h6>
+              <p class="my-1 text-dark">Afiliacion: {{superheroe.biography.alignment}}</p>
             </div>
-            <div class="my-auto d-flex justify-content-center m-1">
-              <button class="btn btn-outline-success me-1 fs text-success" 
-              (click)="agregar(s.id)">Añadir</button>
-              <button class="btn btn-outline-info" (click)="detalles(s.id)">
+            <div class="my-auto d-flex justify-content-center">
+              <button class="btn btn-outline-success me-1 text-success"
+              (click)="agregar(superheroe.id)">Añadir</button>
+              <button class="btn btn-outline-info" (click)="detalles(superheroe.id)">
                 <i class="fas fa-info-circle"></i>
               </button>
             </div>
           </div>
         </div>
       </div>
-      
+    </ng-container>
+
   </div>
 </div>
 <app-footer></app-footer>
 
-<ng-template #noTeam>
-  <div class="px-3 fs">
-    <h4 class="text-white my-4">No cuenta con ningun heroe en su equipo</h4>
-    <p class="text-white">Para añadir un nuevo heroe, escriba en el buscador el 
+<ng-template *ngIf="equipo.length == 0">
+  <div class="px-3">
+    <h4 class="my-4">No cuenta con ningun heroe en su equipo</h4>
+    <p>Para añadir un nuevo heroe, escriba en el buscador el
       nombre del heroe que desea añadir
     </p>
   </div>

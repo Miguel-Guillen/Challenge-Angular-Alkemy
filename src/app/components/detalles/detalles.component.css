@@ -1,6 +1,15 @@
+.contenedor {
+  width: 85%;
+  height: auto;
+}
+
 .bg-cont {
     background-color: #212529;
 }
+.bg-div {
+  background-color: #00314c;
+}
+
 p {
     font-family: 'Times New Roman', Times, serif;
     font-size: 17px;
@@ -8,30 +17,58 @@ p {
 h5 {
     font-family: 'Times New Roman', Times, serif;
 }
-.bg-div {
- background-color: #00314c;
-}
 
 @media (width > 1440px){
+  p {
+      font-size: 1.1em;
+  }
+  img {
+    width: auto;
+    height: 340px;
+  }
+  .contenedor {
+    width: 1400px;
+    height: auto;
+  }
+
+}
+
+@media (max-width: 1440px){
+  p {
+      font-size: 1.1em;
+  }
+  img {
+    width: 75%;
+    height: auto;
+  }
+}
+
+@media (max-width: 1024px){
     p {
-        font-size: 26px;
+        font-size: 1.1em;
+    }
+    img {
+      width: 100%;
+      height: auto;
     }
 }
 
-@media (max-width: 992px){
+@media (max-width: 768px){
     p {
-        font-size: 16px;
+        font-size: 1em;
+    }
+    img {
+      width: 68%;
+      height: auto;
     }
 }
 
-@media (max-width: 769px){
+@media (width < 425px){
     p {
-        font-size: 15px;
+        font-size: 0.9em;
     }
-}
-
-@media (max-width: 576px){
-    p {
-        font-size: 14px;
+    img {
+      width: 100%;
+      height: auto;
     }
 }

@@ -1,86 +1,117 @@
 <app-navbar></app-navbar>
-<div class="container-fluid pt-4 bg-cont">
-    <div class="row mx-lg-4 mx-2 border border-3 bg-light rounded">
+<div class="container-fluid py-3 py-lg-5 bg-cont d-flex justify-content-center">
+    <div class="row contenedor d-flex justify-content-around align-items-center bg-light
+    rounded mx-2 mx-xl-5">
 
-        <div class="col-xl-4 col-lg-5 col-md-6 border border-2">
-            <div class="row py-2 px-1">
-                <div class="col-6 p-1 my-auto">
-                    <img src="{{heroe.image.url}}" class="img-thumbnail rounded" alt="">
+        <div class="col-11 col-md-5">
+            <div class="row py-1">
+                <div class="col-6 p-1 my-auto text-center">
+                    <img src="{{heroe?.image?.url}}" class="img-thumbnail rounded" alt="">
                 </div>
-                <div class="col-6 py-lg-1 px-lg-2 p-1">
-                    <h5 class="fw-bold border-bottom border-2">{{heroe.name}}</h5>
+                <div class="col-6 d-flex align-items-center p-1">
+                  <div>
+                    <h5 class="fw-bold border-bottom border-2">{{heroe?.name}}</h5>
                     <p class="my-1 border-bottom border-2">Nombre: {{heroe.biography['full-name']}}</p>
                     <p class="my-1 border-bottom border-2">Alter egos: {{heroe.biography['alter-egos']}}</p>
-                    <p class="my-1 border-bottom border-2">Alias: {{heroe.biography.aliases}}</p>
-                    <p class="my-1">Afiliacion: {{heroe.biography.alignment}}</p>
+                    <p class="my-1 border-bottom border-2">Alias: {{heroe?.biography?.aliases}}</p>
+                    <p class="my-1">Afiliacion: {{heroe?.biography?.alignment}}</p>
+                  </div>
                 </div>
             </div>
-            <div class="row py-1 px-0">
-                <div class="bg-div text-white">Estadisticas</div>
-                <div class="row mx-auto mt-md-2">
-                    <div class="col-6 ps-1 my-1">
-                        <p class="m-0">Combate: {{heroe.powerstats.combat}}</p>
-                        <p class="m-0"><ngb-progressbar [value]="heroe.powerstats.combat" type="success"></ngb-progressbar></p>
-                    </div>
-                    <div class="col-6 ps-1 my-1">
-                        <p class="m-0">Fuerza: {{heroe.powerstats.strength}}</p>
-                        <p class="m-0"><ngb-progressbar [value]="heroe.powerstats.strength" type="success"></ngb-progressbar></p>
-                    </div>
-                    <div class="col-6 ps-1 my-1">
-                        <p class="m-0">Velocidad: {{heroe.powerstats.speed}}</p>
-                        <p class="m-0"><ngb-progressbar [value]="heroe.powerstats.speed" type="success"></ngb-progressbar></p>
-                    </div>
-                    <div class="col-6 ps-1 my-1">
-                        <p class="m-0">Inteligencia: {{heroe.powerstats.intelligence}}</p>
-                        <p class="m-0"><ngb-progressbar [value]="heroe.powerstats.intelligence" type="success"></ngb-progressbar></p>
-                    </div>
-                    <div class="col-6 ps-1 my-1">
-                        <p class="m-0">Resistencia: {{heroe.powerstats.durability}}</p>
-                        <p class="m-0"><ngb-progressbar [value]="heroe.powerstats.durability" type="success"></ngb-progressbar></p>
-                    </div>
-                    <div class="col-6 ps-1 my-1">
-                        <p class="m-0">Poder: {{heroe.powerstats.power}}</p>
-                        <p class="m-0"><ngb-progressbar [value]="heroe.powerstats.power" type="success"></ngb-progressbar></p>
-                    </div>
+            <div class="row py-1">
+              <div class="bg-div text-white py-1 rounded">Estadisticas</div>
+              <div class="row mx-auto d-flex justify-content-around py-2">
+                <div class="col-6 col-xl-5 px-1 my-1">
+                  <p class="m-0">Combate: {{heroe?.powerstats?.combat}}</p>
+                  <p class="m-0"><ngb-progressbar [value]="heroe?.powerstats?.combat" type="success"></ngb-progressbar></p>
                 </div>
+                <div class="col-6 col-xl-5 px-1 my-1">
+                  <p class="m-0">Fuerza: {{heroe?.powerstats?.strength}}</p>
+                  <p class="m-0"><ngb-progressbar [value]="heroe?.powerstats?.strength" type="success"></ngb-progressbar></p>
+                </div>
+                <div class="col-6 col-xl-5 px-1 my-1">
+                  <p class="m-0">Velocidad: {{heroe?.powerstats?.speed}}</p>
+                  <p class="m-0"><ngb-progressbar [value]="heroe?.powerstats?.speed" type="success"></ngb-progressbar></p>
+                </div>
+                <div class="col-6 col-xl-5 px-1 my-1">
+                  <p class="m-0">Inteligencia: {{heroe?.powerstats?.intelligence}}</p>
+                  <p class="m-0"><ngb-progressbar [value]="heroe?.powerstats?.intelligence" type="success"></ngb-progressbar></p>
+                </div>
+                <div class="col-6 col-xl-5 px-1 my-1">
+                  <p class="m-0">Resistencia: {{heroe?.powerstats?.durability}}</p>
+                  <p class="m-0"><ngb-progressbar [value]="heroe?.powerstats?.durability" type="success"></ngb-progressbar></p>
+                </div>
+                <div class="col-6 col-xl-5 px-1 my-1">
+                  <p class="m-0">Poder: {{heroe?.powerstats?.power}}</p>
+                  <p class="m-0"><ngb-progressbar [value]="heroe?.powerstats?.power" type="success"></ngb-progressbar></p>
+                </div>
+              </div>
             </div>
         </div>
 
-        <div class="col-xl-8 col-lg-7 col-md-6 my-1">
-            <div class="bg-div text-white px-2">Descripcion</div>
-            <div class="row pb-2 px-3 g-0">
-                <div class="col-6 py-2 px-3">
-                    <p class="my-1 border-bottom border-2">Genero: {{heroe.appearance.gender}}</p>
-                    <p class="my-1 border-bottom border-2">Raza: {{heroe.appearance.race}}</p>
-                    <p class="my-1 border-bottom border-2">Peso: {{heroe.appearance.height[1]}}</p>
-                    <p class="my-1 border-bottom border-2">Altura: {{heroe.appearance.weight[1]}}</p>
-                    <p class="my-1 border-bottom border-2">Color de ojos: {{heroe.appearance['eye-color']}}</p>
-                    <p class="my-1">Color de cabello: {{heroe.appearance['hair-color']}}</p>
-                </div>
-                <div class="col-6 py-2 px-3">
-                    <p class="my-1 border-bottom border-2">Ocupacion: {{heroe.work.occupation}}</p>
-                    <p class="my-1 border-bottom border-2">Base: {{heroe.work.base}}</p>
-                    <p class="my-1 border-bottom border-2">Lugar de nacimiento: {{heroe.biography['place-of-birth']}}</p>
-                    <p class="my-1 border-bottom border-2">Primera aparicion: {{heroe.biography['first-appearance']}}</p>
-                    <p class="my-1">Editor: {{heroe.biography.publisher}}</p>
-                </div>
+        <div class="col-11 col-md-6">
+          <div class="row py-1">
+            <div class="bg-div text-white py-1 rounded">Descripcion</div>
+            <div class="col-5 py-2 ps-3">
+                <p class="my-1 border-bottom border-2">
+                  <span class="fw-bold">Genero: </span>{{heroe?.appearance?.gender}}
+                </p>
+                <p class="my-1 border-bottom border-2">
+                  <span class="fw-bold">Raza: </span>{{heroe?.appearance?.race}}
+                </p>
+                <p class="my-1 border-bottom border-2">
+                  <span class="fw-bold">Peso: </span>{{heroe.appearance.height[1]}}
+                </p>
+                <p class="my-1 border-bottom border-2">
+                  <span class="fw-bold">Altura: </span>{{heroe.appearance.weight[1]}}
+                </p>
+                <p class="my-1 border-bottom border-2">
+                  <span class="fw-bold">Color de ojos: </span>{{heroe.appearance['eye-color']}}
+                </p>
+                <p class="my-1">
+                  <span class="fw-bold">Color de cabello: </span>{{heroe.appearance['hair-color']}}
+                </p>
             </div>
-            <div class="row px-3">
-                <div class="bg-div text-white mt-lg-3 mb-1">Conexiones</div>
-                <div class="row g-0 mx-auto">
-                    <div class="col py-2 px-3">
-                        <p class="m-0 border-bottom border-2">Grupo: {{heroe.connections['group-affiliation']}}</p>
-                        <p class="m-0">Relaciones: {{heroe.connections.relatives}}</p>
-                    </div>
-                </div>
+            <div class="col-7 py-2 ps-2 pe-3">
+                <p class="my-1 border-bottom border-2">
+                  <span class="fw-bold">Ocupacion: </span>{{heroe?.work?.occupation}}
+                </p>
+                <p class="my-1 border-bottom border-2">
+                  <span class="fw-bold">Base: </span>{{ (heroe?.work?.base.length > 50) ?
+                  (heroe?.work?.base | slice: 0:50) + '...' : (heroe?.work?.base) }}</p>
+                <p class="my-1 border-bottom border-2">
+                  <span class="fw-bold">Fecha de nacimiento: </span>{{heroe.biography['place-of-birth']}}
+                </p>
+                <p class="my-1 border-bottom border-2">
+                  <span class="fw-bold">Primer aparicion: </span>{{heroe.biography['first-appearance']}}
+                </p>
+                <p class="my-1">
+                  <span class="fw-bold">Editorial: </span>{{heroe?.biography?.publisher}}
+                </p>
             </div>
+          </div>
+          <div class="row py-1">
+            <div class="bg-div text-white rounded py-1">Conexiones</div>
+            <div class="col py-2 px-3">
+              <p class="mt-1">
+                <span class="fw-bold">Grupo: </span>{{ (heroe.connections['group-affiliation'].length > 110) ?
+                (heroe.connections['group-affiliation'] | slice: 0:110) + '...' : (heroe.connections['group-affiliation']) }}
+              </p>
+              <p class="mt-1">
+                <span class="fw-bold">Relaciones: </span>
+                {{ (heroe.connections.relatives.length > 110) ? (heroe.connections.relatives | slice: 0:110)
+                  + ' ...' : (heroe.connections.relatives) }}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="ms-4 pb-3">
+          <button class="btn btn-outline-primary" [routerLink]="['/buscar']">
+            <i class="far fa-arrow-alt-circle-left"></i>Volver
+          </button>
         </div>
 
     </div>
-    <button class="btn btn-outline-primary mx-lg-5 mx-3 my-4" [routerLink]="['/buscar']">
-        <i class="far fa-arrow-alt-circle-left"></i>
-        Volver
-    </button>
-
 </div>
 <app-footer></app-footer>

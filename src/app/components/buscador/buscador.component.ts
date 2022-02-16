@@ -46,7 +46,7 @@ export class BuscadorComponent implements OnInit {
   }
 
   buscar(value: any){
-    if(this.busquedaForm.valid === true || 
+    if(this.busquedaForm.valid === true ||
       this.busquedaForm.get('nombre')?.hasError('minLength') === true){
       this.superheroe = [];
       const nombre = value.nombre;
@@ -54,25 +54,23 @@ export class BuscadorComponent implements OnInit {
       this.servicio.busquedaNombre(nombre).subscribe((res: any) => {
         const notFound = 'character with given name not found';
         if(res.error == notFound){
-          this.toast.error(`No se encontro ningun personaje con el nombre ${nombre}"`,
-          'Nombre invalido');
+          this.toast.error(`No se encontro ningun superheroe ${nombre}"`);
         }else{
           this.superheroe = res.results;
           this.toast.success('superheroes encontrados', '',
           { positionClass: 'toast-bottom-right' });
         };
       }, err => {
-        this.toast.error('Ha ocurrido un error al realizar la busqueda', 'Error al buscar');
+        this.toast.error('Ha ocurrido un error al realizar la busqueda');
         console.log(err);
       })
-    }else this.toast.error("se requiere de un nombre o frase de al menos 3 caracteres",
-    'Valores no validos');
+    }else this.toast.error("se requiere de un nombre o frase de al menos 3 caracteres");
   }
 
   agregar(id: string){
     if(this.equipo.length < 6){
       if(this.equipo.some(superheroe => superheroe.id == id)){
-        this.toast.warning(`el personaje ya se encuentra añadido en su equipo`, 
+        this.toast.warning(`el personaje ya se encuentra añadido en su equipo`,
         'Error al añadir');
       }else {
         const heroes: any[] = [];
@@ -86,7 +84,7 @@ export class BuscadorComponent implements OnInit {
         for(const superheroe of this.superheroe){
           let nuevo = true;
 
-          if(superheroe.id == id && superheroe.biography.alignment == 'good' && 
+          if(superheroe.id == id && superheroe.biography.alignment == 'good' &&
           heroes.length == 3){
             this.toast.warning('su equipo ya cuenta con 3 heroes, no se puede añadir mas heroes',
             'Error al añadir el personaje');
